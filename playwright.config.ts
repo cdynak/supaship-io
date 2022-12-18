@@ -58,20 +58,20 @@ const config: PlaywrightTestConfig = {
       },
     },
 
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
-
-    /* Test against mobile viewports. */
     // {
-    //   name: 'Mobile Chrome',
+    //   name: 'webkit',
     //   use: {
-    //     ...devices['Pixel 5'],
+    //     ...devices['Desktop Safari'],
     //   },
     // },
+
+    /* Test against mobile viewports. */
+    {
+      name: 'Mobile Chrome',
+      use: {
+        ...devices['Pixel 5'],
+      },
+    },
     // {
     //   name: 'Mobile Safari',
     //   use: {
@@ -98,10 +98,11 @@ const config: PlaywrightTestConfig = {
   // outputDir: 'test-results/',
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
+  webServer: {
+    command: 'npm run dev',
+    port: 1337,
+    reuseExistingServer: true
+  },
 };
 
 export default config;
