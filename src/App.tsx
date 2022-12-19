@@ -1,6 +1,38 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import { createBrowserRouter } from 'react-router-dom'
+import MessageBoard from './MessageBoard'
+import AllPosts from './AllPosts'
+import PostView from './PostView'
+import Welcome from './Welcome'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        element: <MessageBoard />,
+        children: [
+          {
+            path: ":pageNumber",
+            element: <AllPosts />,
+          },
+          {
+            path: "post/:postId",
+            element: <PostView />,
+          },
+        ],
+      },
+      {
+        path: "welcome",
+        element: <Welcome />,
+      },
+    ],
+  },
+])
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,3 +64,7 @@ function App() {
 }
 
 export default App
+
+function Layout() {
+  return <h2>Layout</h2>;
+}
