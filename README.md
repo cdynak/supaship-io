@@ -1,6 +1,6 @@
 # supaship-io
 
-## Local development
+## LOCAL DEVELOPMENT
 
 ### Frontend Setup
 
@@ -34,4 +34,12 @@ npm i -D detect-port
 npm i -D tailwindcss
 npx tailwind init
 npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch # watch Tailwind CSS classes (keep it running)
+```
+
+## APP ARCHITECTURE
+
+```
+npm i react-router-dom
+npm i @supabase/auth-ui-react
+npm i @supabase/supabase-js
 ```
