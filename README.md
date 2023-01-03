@@ -42,4 +42,5 @@ npx tailwindcss -i ./src/index.css -o ./dist/output.css --watch # watch Tailwind
 npm i react-router-dom
 npm i @supabase/auth-ui-react
 npm i @supabase/supabase-js
+npx supabase gen types typescript --local > ./src/database.types.ts
 ```
