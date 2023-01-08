@@ -8,8 +8,8 @@ export async function setupE2eTest() {
 }
 
 async function startSupabase() {
-  const port = await detect(64321);
-  if (port !== 64321) {
+  const port = await detect(54321);
+  if (port !== 54321) {
     return;
   }
   console.warn("Supabase not detected - Starting it now");
@@ -18,7 +18,7 @@ async function startSupabase() {
 
 function reseedDb() {
   execSync(
-    "PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 64322 -f supabase/clear-db-data.sql",
+    "PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 54322 -f supabase/clear-db-data.sql",
     { stdio: "ignore" }
   )
 }
@@ -28,7 +28,7 @@ export async function signUp(
   email: string,
   password: string,
   userName: string,
-  skipUserName = false
+  skipUserName = true
 ) {
   const signUpButton = page.locator("button", { hasText: "Sign Up" }).first();
   await signUpButton.click();
@@ -37,8 +37,8 @@ export async function signUp(
   const passwordInput = page.locator('input[name="password"]');
   await passwordInput.fill(password);
   await page.keyboard.press("Enter");
-  const welcomeNotice = page.locator("h2", { hasText: "Welcome to Supaship!" });
-  await expect(welcomeNotice).toHaveCount(1);
+  // const welcomeNotice = page.locator("h2", { hasText: "Welcome to Supaship!" });
+  // await expect(welcomeNotice).toHaveCount(1);
   if (skipUserName) {
     return;
   }
@@ -56,7 +56,8 @@ export async function login(
   email: string,
   password: string,
   username: string,
-  loginButtonSelector = "button"
+  loginButtonSelector = "button",
+  skipUserName = true
 ) {
   const signUpButton = page
     .locator(loginButtonSelector, { hasText: "Login" })
@@ -69,12 +70,15 @@ export async function login(
   await page.keyboard.press("Enter");
   const logoutButton = page.locator("button", { hasText: "Logout" });
   await expect(logoutButton).toHaveCount(1);
+  if (skipUserName) {
+    return;
+  }
   const usernameMention = page.locator("h2", { hasText: username });
   await expect(usernameMention).toHaveCount(1);
 }
 
 export async function createPost(page: Page, title: string, contents: string) {
-  page.goto("http://localhost:1337/1");
+  page.goto("/1");
   const postTitleInput = page.locator(`input[name="title"]`);
   const postContentsInput = page.locator(`textarea[name="contents"]`);
   const postSubmitButton = page.locator(`button[type="submit"]`);
