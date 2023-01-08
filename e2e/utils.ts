@@ -28,7 +28,7 @@ export async function signUp(
   email: string,
   password: string,
   userName: string,
-  skipUserName = true
+  skipUserName = false
 ) {
   const signUpButton = page.locator("button", { hasText: "Sign Up" }).first();
   await signUpButton.click();
@@ -37,8 +37,8 @@ export async function signUp(
   const passwordInput = page.locator('input[name="password"]');
   await passwordInput.fill(password);
   await page.keyboard.press("Enter");
-  // const welcomeNotice = page.locator("h2", { hasText: "Welcome to Supaship!" });
-  // await expect(welcomeNotice).toHaveCount(1);
+  const welcomeNotice = page.locator("h2", { hasText: "Welcome to Supaship!" });
+  await expect(welcomeNotice).toHaveCount(1);
   if (skipUserName) {
     return;
   }
@@ -57,7 +57,7 @@ export async function login(
   password: string,
   username: string,
   loginButtonSelector = "button",
-  skipUserName = true
+  skipUserName = false
 ) {
   const signUpButton = page
     .locator(loginButtonSelector, { hasText: "Login" })

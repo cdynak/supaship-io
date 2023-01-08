@@ -2,6 +2,7 @@ import { useState } from "react";
 import Dialog from "./Dialog";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { supaClient } from "./supa-client";
+import { setReturnPath } from "./use-session";
 
 export default function Login() {
   const [showModal, setShowModal] = useState(false);
@@ -13,6 +14,7 @@ export default function Login() {
           onClick={() => {
             setShowModal(true);
             setAuthMode("sign_in");
+            setReturnPath();
           }}
         >
           Login
@@ -22,6 +24,7 @@ export default function Login() {
           onClick={() => {
             setShowModal(true);
             setAuthMode("sign_up");
+            setReturnPath();
           }}
         >
           Sign Up
