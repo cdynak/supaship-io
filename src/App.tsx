@@ -2,7 +2,7 @@ import './App.css'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import MessageBoard from './MessageBoard'
 import AllPosts from './AllPosts'
-import PostView from './PostView'
+import { PostView } from './Post'
 import { Welcome, welcomeLoader } from './Welcome'
 import NavBar from './NavBar'
 import { SupashipUserInfo, useSession } from './use-session'
@@ -54,5 +54,5 @@ function Layout() {
       <NavBar />
       <Outlet />
     </UserContext.Provider>
-  </>;
+    </>;
 }
