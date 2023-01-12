@@ -54,5 +54,5 @@ function Layout() {
       <NavBar />
       <Outlet />
     </UserContext.Provider>
-    </>;
+  </>;
 }
